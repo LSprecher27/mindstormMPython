@@ -163,15 +163,23 @@ Pick one of these or come up with your own:
 
 Before you write code, answer these on paper:
 
-**1. What is your robot's goal?** (one sentence)
+**1. What is your robot's goal?** (one sentence) 
 
-**2. What should the robot do when the sensor reads a SHORT distance?** (object is close)
+**2. What should the robot do when the sensor reads a SHORT distance?** (object is close) When it senses something, play the audio file and stop
 
-**3. What should the robot do when the sensor reads a LONG distance?** (nothing nearby)
+**3. What should the robot do when the sensor reads a LONG distance?** (nothing nearby) It should keep moving
 
-**4. What distance threshold(s) will you use?** (e.g., 200 mm, 500 mm — you may need more than one)
+**4. What distance threshold(s) will you use?** (e.g., 200 mm, 500 mm — you may need more than one) 150mm
 
 **5. Pseudocode** — write your logic in plain English:
+'''
+Robot Movement Idea:
+    - Start Driving
+        - Loop forever
+            - If the obstacle is within 150 mm, play song and stop
+                - Else, keep driving
+'''
+
 ```
 Example:
   - Start driving forward
