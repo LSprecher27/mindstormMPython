@@ -17,7 +17,7 @@ obstacle_sensor = UltrasonicSensor(Port.S4)
 Robot Movement Idea:
     - Start Driving
         - Loop forever
-            - If the obstacle is within 150 mm, play song and stop
+            - If the obstacle is within 150 mm, play sound and stop
                 - Else, keep driving
 '''
 
@@ -30,8 +30,8 @@ while True:
         robot.stop()
         # set speaker to 50% volume
         ev3.speaker.set_volume(50)
-        # play the sound file test.wav
-        ev3.speaker.play_file('test.wav')
+        # play the sound 
+        ev3.speaker.beep(800, 500)
     else:
         # if not, keep the robot driving
         robot.drive(-100, 0)

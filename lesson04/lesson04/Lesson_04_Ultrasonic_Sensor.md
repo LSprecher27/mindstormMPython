@@ -165,7 +165,7 @@ Before you write code, answer these on paper:
 
 **1. What is your robot's goal?** (one sentence) 
 
-**2. What should the robot do when the sensor reads a SHORT distance?** (object is close) When it senses something, play the audio file and stop
+**2. What should the robot do when the sensor reads a SHORT distance?** (object is close) When it senses something, play the beep and stop
 
 **3. What should the robot do when the sensor reads a LONG distance?** (nothing nearby) It should keep moving
 
@@ -176,7 +176,7 @@ Before you write code, answer these on paper:
 Robot Movement Idea:
     - Start Driving
         - Loop forever
-            - If the obstacle is within 150 mm, play song and stop
+            - If the obstacle is within 150 mm, play sound and stop
                 - Else, keep driving
 '''
 
