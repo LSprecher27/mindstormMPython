@@ -1,39 +1,38 @@
 #!/usr/bin/env pybricks-micropython
-
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor, UltrasonicSensor
-from pybricks.parameters import Port
-from pybricks.robotics import DriveBase
+from pybricks.parameters import Port, Stop
 from pybricks.tools import wait
 
+# Initialize the EV3 Brick
 ev3 = EV3Brick()
-left_motor  = Motor(Port.B)
+
+# Initialize Motors on Ports B and C
+left_motor = Motor(Port.B)
 right_motor = Motor(Port.C)
-robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
-obstacle_sensor = UltrasonicSensor(Port.S4)
+# Initialize the Ultrasonic Sensor on Port S4
+ultrasonic_sensor = UltrasonicSensor(Port.S4)
 
-'''
-Robot Movement Idea:
-    - Start Driving
-        - Loop forever
-            - If the obstacle is within 150 mm, play sound and stop
-                - Else, keep driving
-'''
+# Set the speed (1000 is usually the maximum degrees per second)
+DRIVE_SPEED = 1000 
+STOP_DISTANCE = 200 # mm
 
+# Start driving forward
+left_motor.run(DRIVE_SPEED)
+right_motor.run(DRIVE_SPEED)
 
-
+# Loop that checks the sensor constantly
 while True:
-    # If an object is detected within 150 mm, stop the robot and play music
-    if obstacle_sensor.distance() < 150:
-        # stop the robot
-        robot.stop()
-        # set speaker to 50% volume
-        ev3.speaker.set_volume(50)
-        # play the sound 
-        ev3.speaker.beep(800, 500)
-    else:
-        # if not, keep the robot driving
-        robot.drive(-100, 0)
-        #stop the robot after a while
-    wait(100)
+    # Check if an object is closer than 200mm
+    if ultrasonic_sensor.distance() <= STOP_DISTANCE:
+        # Stop the motors immediately
+        left_motor.stop(Stop.BRAKE)
+        right_motor.stop(Stop.BRAKE)
+        
+        # Beep to signal the stop
+        ev3.speaker.beep()
+        break 
+    
+    # Small wait to keep the CPU from overworking
+    wait(10)
